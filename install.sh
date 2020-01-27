@@ -31,26 +31,26 @@ sudo -u postgres psql -U postgres -f init_sql.sql
 #apt install lora-app-server
 
 #3.2 download lora packages
-wget https://artifacts.loraserver.io/packages/3.x/deb/pool/main/l/lora-app-server/lora-app-server_3.1.0_linux_amd64.deb 
-wget https://artifacts.loraserver.io/packages/3.x/deb/pool/main/l/lora-gateway-bridge/lora-gateway-bridge_3.0.1_linux_arm64.deb
-wget https://artifacts.loraserver.io/packages/3.x/deb/pool/main/l/loraserver/loraserver_3.0.2_linux_amd64.deb
+wget https://artifacts.chirpstack.io/packages/3.x/deb/pool/main/c/chirpstack-application-server/chirpstack-application-server_3.7.0_linux_amd64.deb 
+wget https://artifacts.chirpstack.io/packages/3.x/deb/pool/main/c/chirpstack-gateway-bridge/chirpstack-gateway-bridge_3.6.0_linux_amd64.deb
+wget https://artifacts.chirpstack.io/packages/3.x/deb/pool/main/c/chirpstack-network-server/chirpstack-network-server_3.6.0_linux_amd64.deb
 
 #3.3 install lora packages
-dpkg -i lora-app-server_3.1.0_linux_amd64.deb 
-dpkg -i lora-gateway-bridge_3.0.1_linux_arm64.deb
-dpkg -i loraserver_3.0.2_linux_amd64.deb
+dpkg -i chirpstack-application-server_3.7.0_linux_amd64.deb 
+dpkg -i chirpstack-gateway-bridge_3.6.0_linux_amd64.deb
+dpkg -i chirpstack-network-server_3.6.0_linux_amd64.deb
 
 #4. configure lora
 # configure LoRa Server
-cp -f /etc/loraserver/loraserver.toml  /etc/loraserver/loraserver.toml_bak
-cp -rf ./loraserver_conf/*  /etc/loraserver/
+cp -f /etc/chirpstack-network-server/chirpstack-network-server.toml  /etc/chirpstack-network-server/chirpstack-network-server.toml_bak
+cp -rf ./loraserver_conf/*  /etc/chirpstack-network-server/
 #cp -f /etc/loraserver/loraserver.eu_863_870.toml /etc/loraserver.toml
-chown -R loraserver:loraserver /etc/loraserver
+chown -R networkserver:networkserver /etc/chirpstack-network-server
 
 # configure LoRa App Server
-cp -f /etc/lora-app-server/lora-app-server.toml /etc/lora-app-server/lora-app-server.toml_bak
-cp -f ./lora-app-server.toml /etc/lora-app-server/lora-app-server.toml
-chown -R appserver:appserver /etc/lora-app-server
+cp -f /etc/chirpstack-application-server/chirpstack-application-server.toml /etc/chirpstack-application-server/chirpstack-application-server.toml_bak
+cp -f ./lora-app-server.toml /etc/chirpstack-application-server/chirpstack-application-server.toml
+chown -R appserver:appserver /etc/chirpstack-application-server
 
 #5. start lora
 # start loraserver
